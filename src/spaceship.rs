@@ -4,7 +4,7 @@ pub struct Spaceship {
 	pub state: State,
 }
 
-#[derive(Default)]
+#[derive(Default, PartialEq)]
 pub enum State {
 	#[default]
 	UnFueled,
