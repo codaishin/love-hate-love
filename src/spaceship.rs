@@ -1,23 +1,34 @@
 #[derive(Default)]
-pub struct Spaceship {
+pub struct Spaceship<TState> {
 	pub name: &'static str,
-	pub state: State,
+	state: TState,
 }
 
-#[derive(Default, PartialEq)]
-pub enum State {
-	#[default]
-	UnFueled,
-	Fueled,
-	InSpace,
-}
+pub struct UnFueled;
+pub struct Fueled;
+pub struct InSpace;
 
-impl Spaceship {
-	pub fn fuel(&mut self) {
-		self.state = State::Fueled;
+impl Spaceship<UnFueled> {
+	pub fn new(name: &'static str) -> Self {
+		Self {
+			name,
+			state: UnFueled,
+		}
 	}
 
-	pub fn take_off(&mut self) {
-		self.state = State::InSpace;
+	pub fn fuel(self) -> Spaceship<Fueled> {
+		Spaceship {
+			name: self.name,
+			state: Fueled,
+		}
+	}
+}
+
+impl Spaceship<Fueled> {
+	pub fn take_off(self) -> Spaceship<InSpace> {
+		Spaceship {
+			name: self.name,
+			state: InSpace,
+		}
 	}
 }

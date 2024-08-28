@@ -1,14 +1,7 @@
-use love_hate_love::spaceship::{Spaceship, State};
+use love_hate_love::spaceship::Spaceship;
 
 fn main() {
-	let mut spaceship = Spaceship {
-		name: "Defiant",
-		..Default::default()
-	};
-
-	spaceship.fuel();
-
-	if spaceship.state == State::Fueled {
-		spaceship.take_off();
-	}
+	let spaceship = Spaceship::new("Defiant");
+	let spaceship = spaceship.fuel();
+	let _spaceship = spaceship.take_off();
 }
