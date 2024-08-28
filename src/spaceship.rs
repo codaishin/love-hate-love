@@ -1,7 +1,9 @@
+use std::marker::PhantomData;
+
 #[derive(Default)]
 pub struct Spaceship<TState> {
 	pub name: &'static str,
-	state: TState,
+	state: PhantomData<TState>,
 }
 
 pub struct UnFueled;
@@ -12,14 +14,14 @@ impl Spaceship<UnFueled> {
 	pub fn new(name: &'static str) -> Self {
 		Self {
 			name,
-			state: UnFueled,
+			state: PhantomData,
 		}
 	}
 
 	pub fn fuel(self) -> Spaceship<Fueled> {
 		Spaceship {
 			name: self.name,
-			state: Fueled,
+			state: PhantomData,
 		}
 	}
 }
@@ -28,7 +30,7 @@ impl Spaceship<Fueled> {
 	pub fn take_off(self) -> Spaceship<InSpace> {
 		Spaceship {
 			name: self.name,
-			state: InSpace,
+			state: PhantomData,
 		}
 	}
 }
