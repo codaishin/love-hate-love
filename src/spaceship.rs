@@ -34,3 +34,12 @@ impl Spaceship<Fueled> {
 		}
 	}
 }
+
+impl Spaceship<InSpace> {
+	pub fn land(self) -> Spaceship<UnFueled> {
+		Spaceship {
+			name: self.name,
+			state: PhantomData,
+		}
+	}
+}
